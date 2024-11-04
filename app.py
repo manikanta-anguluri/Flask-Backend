@@ -1,8 +1,10 @@
 # Import necessary modules
 from flask import Flask, jsonify
+from flask_cors import CORS
 
 # Create a Flask app
 app = Flask(__name__)
+CORS(app)
 
 # Define two API endpoints
 @app.route('/', methods=['GET'])
@@ -21,7 +23,7 @@ def goodbye():
 def test1():
     return jsonify(message="Test1 is OK")
 
-@app.route('/test1', methods=['GET'])
+@app.route('/test2', methods=['GET'])
 def test2():
     return jsonify(message="Test2 is OK")
 
