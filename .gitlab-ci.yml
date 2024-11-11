@@ -1,18 +1,25 @@
 stages:
   - build
+  - push
   - deploy
 
 build:
   stage: build
-  image: gitlab/dind
-  services:
-    - docker:dind
   # tags:
   #   - docker-build
   script:
-    - echo "Building New Image"
+    - echo "Building Docker Image..."
     - docker --version
-    - docker build -t $CI_REGISTRY_IMAGE --no-cache .
+    - docker build -t $CI_REGISTRY_IMAGE .
+
+push:
+  stage: push
+  # tags:
+  #   - docker-build
+  script:
+    - echo "Pushing Docker image to GitLab Container Registry..."
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_JOB_TOKEN" "$CI_REGISTRY"
+    - docker push "$CI_REGISTRY_IMAGE"
 
 # deploy:
 #   stage: deploy
