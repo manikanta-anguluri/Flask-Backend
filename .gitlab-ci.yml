@@ -29,5 +29,5 @@ deploy:
   #   - ssh-add <(echo "$RUNNER_SSH_KEY")
   #   - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
   script:
-    - ssh tls@192.168.1.200 "cd ./flaskapp && sudo docker compose 
-      pull flask-be && sudo docker compose up -d flask-be && exit"
+    - ssh tls@192.168.1.200 "cd ./flaskapp && docker login -u '$CI_REGISTRY_USER' -p '$CI_JOB_TOKEN' '$CI_REGISTRY' && 
+      docker compose pull flask-be && docker compose up -d flask-be && exit"
