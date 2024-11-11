@@ -7,8 +7,8 @@ build:
   image: gitlab/dind
   services:
     - docker:dind
-  tags:
-    - docker-build
+  # tags:
+  #   - docker-build
   script:
     - echo "Building New Image"
     - docker --version
