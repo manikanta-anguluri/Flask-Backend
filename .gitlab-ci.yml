@@ -12,17 +12,17 @@ build:
   script:
     - echo "Building New Image"
     - docker --version
-    - docker build -t flaskapp --no-cache .
+    - docker build -t $CI_REGISTRY_IMAGE --no-cache .
 
-deploy:
-  stage: deploy
-  image: ubuntu:20.04
-  script:
-    - echo "Stoping Old Server..."
-    - docker stop flaskapp && docker rm flaskapp
-    - echo "Deploying Docker container..."
-    - docker run --name flaskapp -p 5000:5000 --restart=always -d flaskapp
-    - docker ps
+# deploy:
+#   stage: deploy
+#   image: ubuntu:20.04
+#   script:
+#     - echo "Stoping Old Server..."
+#     - docker stop flaskapp && docker rm flaskapp
+#     - echo "Deploying Docker container..."
+#     - docker run --name flaskapp -p 5000:5000 --restart=always -d flaskapp
+#     - docker ps
     # before_script:
     # - apt-get update -qq
     # - apt-get install -qq git
